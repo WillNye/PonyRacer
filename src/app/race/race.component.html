@@ -1,0 +1,5 @@
+<h2>{{ raceModel.name }}</h2>
+<p>{{ raceModel.startInstant | fromNow }}</p>
+<ul *ngFor="let pony of raceModel.ponies">
+  <li><pr-pony [ponyModel]="pony"></pr-pony></li>
+</ul>
