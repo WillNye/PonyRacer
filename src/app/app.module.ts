@@ -2,7 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { ROUTES } from './app.routes';
 import { AppComponent } from './app.component';
@@ -13,6 +14,8 @@ import { RaceComponent } from './race/race.component';
 import { PonyComponent } from './pony/pony.component';
 import { FromNowPipe } from './from-now.pipe';
 import { HomeComponent } from './home/home.component';
+import { RegisterComponent } from './register/register.component';
+import { UserService } from './user.service';
 
 @NgModule({
   declarations: [
@@ -22,15 +25,17 @@ import { HomeComponent } from './home/home.component';
     RaceComponent,
     PonyComponent,
     FromNowPipe,
-    HomeComponent
+    HomeComponent,
+    RegisterComponent
   ],
   imports: [
     RouterModule.forRoot(ROUTES),
+    ReactiveFormsModule,
     BrowserModule,
     FormsModule,
     HttpModule
   ],
-  providers: [RaceService],
+  providers: [RaceService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

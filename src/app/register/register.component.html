@@ -1,0 +1,41 @@
+<form (ngSubmit)="register()" [formGroup]="userForm">
+  <div>
+    <label>Login</label>
+    <input class="form-control" type="text" formControlName="login">
+    <div *ngIf="loginCtrl.dirty && loginCtrl.hasError('required')">
+      Login is required
+    </div>
+    <div *ngIf="loginCtrl.dirty && loginCtrl.hasError('minlength') && loginCtrl.touched" id="login-length-error">
+      Your login should be at least 3 characters
+    </div>
+  </div>
+  <div formGroupName="newPassword">
+    <div>
+      <label>Password</label>
+      <input class="form-control" type="password" formControlName="password">
+      <div *ngIf="passwordCtrl.dirty && passwordCtrl.hasError('required')">
+        Password is required
+      </div>
+    </div>
+    <div>
+      <label>Confirm password</label>
+      <input class="form-control" type="password" formControlName="confirmPassword">
+      <div id=password-matching-error
+           *ngIf="(passwordForm.dirty || confirmPasswordCtrl.dirty) && passwordForm.hasError('matchingError')">
+        Your password does not match
+      </div>
+    </div>
+  </div>
+  <div>
+    <label>Birth year</label>
+    <input class="form-control" type="number" formControlName="birthYear">
+    <div *ngIf="birthYearCtrl.dirty && birthYearCtrl.hasError('required')">
+      Birth year is required
+    </div>
+    <div id="invalid-year-error" *ngIf="birthYearCtrl.dirty && birthYearCtrl.hasError('invalidYear')">
+      This is not a valid year
+    </div>
+  </div>
+  <button type="submit" [disabled]="!userForm.valid">Let's go!</button>
+</form>
+
