@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import { BehaviorSubject } from "rxjs";
+import { BehaviorSubject } from 'rxjs';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 
@@ -32,7 +32,7 @@ export class UserService {
 
   storeLoggedInUser(user) {
     window.localStorage.setItem('rememberMe', JSON.stringify(user));
-    this.requestOptions.headers.set('Authorization', 'Bearer ' + user.token);
+    this.requestOptions.headers.set('Authorization', `Bearer ${user.token}`);
     this.userEvents.next(user);
   }
 
@@ -40,7 +40,7 @@ export class UserService {
     const value = window.localStorage.getItem('rememberMe');
     if (value) {
       const user = JSON.parse(value);
-      this.requestOptions.headers.set('Authorization', 'Bearer ' + user.token);
+      this.requestOptions.headers.set('Authorization', `Bearer ${user.token}`);
       this.userEvents.next(user);
     }
   }

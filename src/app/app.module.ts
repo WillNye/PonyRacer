@@ -18,6 +18,7 @@ import { RegisterComponent } from './register/register.component';
 import { UserService } from './user.service';
 import { LoginComponent } from './login/login.component';
 import { BetComponent } from './bet/bet.component';
+import { LiveComponent } from './live/live.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,9 @@ import { BetComponent } from './bet/bet.component';
     HomeComponent,
     RegisterComponent,
     LoginComponent,
-    BetComponent
+    BetComponent,
+    LiveComponent,
+    LiveComponent
   ],
   imports: [
     RouterModule.forRoot(ROUTES),

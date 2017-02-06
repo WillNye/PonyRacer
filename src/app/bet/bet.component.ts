@@ -22,7 +22,7 @@ export class BetComponent implements OnInit {
   }
 
   betOnPony(pony) {
-    if (!this.isPonySelected(pony)){
+    if (!this.isPonySelected(pony)) {
       this.raceService.bet(this.raceModel.id, pony.id)
         .subscribe(
           race => this.raceModel = race,
