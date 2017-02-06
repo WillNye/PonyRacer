@@ -5,14 +5,16 @@ import {Observable} from 'rxjs/Observable';
 import { environment } from 'environments/environment';
 import { PonyWithPositionModel } from 'app/pony/pony.model';
 import { RaceModel } from './race.model';
+import { WsService } from 'app/ws.service';
 
 import 'rxjs/add/observable/interval';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/take';
+import 'rxjs/add/operator/takeWhile';
 
 @Injectable()
 export class RaceService {
-  constructor(private http: Http) {
+  constructor(private http: Http, private wsService: WsService) {
   }
 
   get(raceId): Observable<RaceModel> {
@@ -38,40 +40,14 @@ export class RaceService {
   }
 
   live(raceId): Observable<Array<PonyWithPositionModel>> {
-    return Observable
-      .interval(1000)
-      .take(101)
-      .map( position => {
-          return [
-              {
-              id: 1,
-              name: 'Superb Runner',
-              color: 'BLUE',
-              position
-            }, {
-              id: 2,
-              name: 'Awesome Fridge',
-              color: 'GREEN',
-              position
-            }, {
-              id: 3,
-              name: 'Great Bottle',
-              color: 'ORANGE',
-              position
-            }, {
-              id: 4,
-              name: 'Little Flower',
-              color: 'YELLOW',
-              position
-            }, {
-              id: 5,
-              name: 'Nice Rock',
-              color: 'PURPLE',
-              position
-            }
-          ]
-        }
-      )
+    return this.wsService.connect(`/race/${raceId}`)
+      .takeWhile(race => race.status !== 'FINISHED')
+      .map(race => race.ponies);
+  }
+
+  boost(raceId, ponyId) {
+    return this.http.post(`${environment.baseUrl}/api/races/${raceId}/boosts`, { ponyId })
+      .map(res => res.json());
   }
 
 }

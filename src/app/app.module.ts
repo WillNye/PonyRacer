@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
+import * as Webstomp from 'webstomp-client';
 
 import { ROUTES } from './app.routes';
 import { AppComponent } from './app.component';
@@ -15,10 +16,11 @@ import { PonyComponent } from './pony/pony.component';
 import { FromNowPipe } from './from-now.pipe';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
-import { UserService } from './user.service';
 import { LoginComponent } from './login/login.component';
 import { BetComponent } from './bet/bet.component';
 import { LiveComponent } from './live/live.component';
+import { UserService } from './user.service';
+import { WsService } from './ws.service';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,12 @@ import { LiveComponent } from './live/live.component';
     FormsModule,
     HttpModule
   ],
-  providers: [RaceService, UserService],
+  providers: [RaceService,
+    UserService,
+    WsService,
+    { provide: 'WebSocket', useValue: WebSocket },
+    { provide: 'Webstomp', useValue: Webstomp }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
