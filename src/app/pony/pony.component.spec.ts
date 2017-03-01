@@ -3,6 +3,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { AppModule } from '../app.module';
 import { PonyComponent } from './pony.component';
+import { PonyModel } from './pony.model';
 
 describe('PonyComponent', () => {
 
@@ -13,7 +14,7 @@ describe('PonyComponent', () => {
   it('should have method to get the image URL', () => {
     // given a pony component with a PURPLE pony
     const ponyComponent: PonyComponent = new PonyComponent();
-    ponyComponent.ponyModel = { id: 1, name: 'Fast Rainbow', color: 'PURPLE' };
+    ponyComponent.ponyModel = { id: 1, name: 'Fast Rainbow', color: 'PURPLE' } as PonyModel;
 
     // when we call the method for the URL
     const url = ponyComponent.getPonyImageUrl();
@@ -27,7 +28,7 @@ describe('PonyComponent', () => {
 
     // given a pony component with a PURPLE pony
     const ponyComponent: PonyComponent = fixture.componentInstance;
-    ponyComponent.ponyModel = { id: 1, name: 'Fast Rainbow', color: 'PURPLE' };
+    ponyComponent.ponyModel = { id: 1, name: 'Fast Rainbow', color: 'PURPLE' } as PonyModel;
 
     // when we trigger the change detection
     fixture.detectChanges();
@@ -49,7 +50,7 @@ describe('PonyComponent', () => {
 
     // given a pony component with a PURPLE pony
     const ponyComponent: PonyComponent = fixture.componentInstance;
-    ponyComponent.ponyModel = { id: 1, name: 'Fast Rainbow', color: 'PURPLE' };
+    ponyComponent.ponyModel = { id: 1, name: 'Fast Rainbow', color: 'PURPLE' } as PonyModel;
 
     ponyComponent.ponyClicked.subscribe((pony) => {
       expect(pony).toBe(ponyComponent.ponyModel, 'The output should emit the `ponyModel` on a click');

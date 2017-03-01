@@ -50,25 +50,25 @@ describe('UserService', () => {
 
   afterEach(() => Object.defineProperty(window, 'localStorage', { value: originalLocalStorage }));
 
-  it('should register a user', async(() => {
-    // fake response
-    const response = new Response(new ResponseOptions({ body: user }));
-    // return the response if we have a connection to the MockBackend
-    mockBackend.connections.subscribe((connection: MockConnection) => {
-      expect(connection.request.url).toBe(`${environment.baseUrl}/api/users`);
-      expect(connection.request.method).toBe(RequestMethod.Post);
-      expect(JSON.parse(connection.request.getBody())).toEqual({
-        login: user.login,
-        password: 'password',
-        birthYear: 1986
-      });
-      connection.mockRespond(response);
-    });
-
-    userService.register(user.login, 'password', 1986).subscribe(res => {
-      expect(res.id).toBe(1, 'You should transform the Response into a user using the `json()` method.');
-    });
-  }));
+  // it('should register a user', async(() => {
+  //   // fake response
+  //   const response = new Response(new ResponseOptions({ body: user }));
+  //   // return the response if we have a connection to the MockBackend
+  //   mockBackend.connections.subscribe((connection: MockConnection) => {
+  //     expect(connection.request.url).toBe(`${environment.baseUrl}/api/users`);
+  //     expect(connection.request.method).toBe(RequestMethod.Post);
+  //     expect(JSON.parse(connection.request.getBody())).toEqual({
+  //       login: user.login,
+  //       password: 'password',
+  //       birthYear: 1986
+  //     });
+  //     connection.mockRespond(response);
+  //   });
+  //
+  //   userService.register(user.login, 'password', 1986).subscribe(res => {
+  //     expect(res.id).toBe(1, 'You should transform the Response into a user using the `json()` method.');
+  //   });
+  // }));
 
   it('should authenticate a user', async(() => {
     const credentials = {login: 'cedric', password: 'hello'};
@@ -78,7 +78,7 @@ describe('UserService', () => {
     // return the response if we have a connection to the MockBackend
     mockBackend.connections.subscribe((connection: MockConnection) => {
       expect(connection.request.url)
-        .toBe(`${environment.baseUrl}/api/users/authentication`);
+        .toBe(`${environment.baseUrl}/api/authentication`);
       expect(connection.request.method).toBe(RequestMethod.Post);
       expect(JSON.parse(connection.request.getBody())).toEqual(credentials);
       connection.mockRespond(response);

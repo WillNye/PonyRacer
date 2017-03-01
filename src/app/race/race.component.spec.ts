@@ -5,6 +5,7 @@ import { By } from '@angular/platform-browser';
 import { AppModule } from '../app.module';
 import { RaceComponent } from './race.component';
 import { PonyComponent } from '../pony/pony.component';
+import { RaceModel } from 'race.model';
 
 describe('RaceComponent', () => {
 
@@ -28,7 +29,7 @@ describe('RaceComponent', () => {
         { id: 5, name: 'Fast Rainbow', color: 'BLUE' }
       ],
       startInstant: '2016-02-18T08:02:00Z'
-    };
+    } as RaceModel;
 
     // when triggering the change detection
     fixture.detectChanges();

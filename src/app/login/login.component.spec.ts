@@ -106,7 +106,7 @@ describe('LoginComponent', () => {
     componentInstance.credentials.login = 'login';
     componentInstance.credentials.password = 'password';
 
-    componentInstance.authenticate();
+    componentInstance.authenticate(componentInstance.credentials);
 
     // then we should have called the user service method
     expect(fakeUserService.authenticate).toHaveBeenCalledWith({
@@ -134,7 +134,7 @@ describe('LoginComponent', () => {
     componentInstance.credentials.login = 'login';
     componentInstance.credentials.password = 'password';
 
-    componentInstance.authenticate();
+    componentInstance.authenticate(componentInstance.credentials);
 
     // then we should have called the user service method
     expect(fakeUserService.authenticate).toHaveBeenCalledWith({
